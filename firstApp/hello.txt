@@ -1,0 +1,34 @@
+Hello from Node.js
+//In node you don't only write code that your server will run it.
+You also write the code that take all the requests and redirects it to other code.
+
+Two ways of executing your code.
+
+1.REPL -> Read, evaluate, print, loop.
+You can use the REPL by using node in the terminal.
+It works, but it won't store your code.
+
+2.Execute files -> Execute code as you write-it, used for reall apps.
+
+rest 
+newArray = [...arrayAntigo];
+spread 
+function = (...args); //acept unlimited number of args
+
+Destructuring
+const printName ({ name }) //it will get just the property name of the object
+{
+    console.log(name);
+}
+//You can also desestructure arrays
+const hobbies = ['Sports', 'Cooking'];
+const [hobby1, hobby2] = hobbies;
+console.log(hobby1, hobby2);
+//it will print by position
+
+Core Modules
+http => launch a server 
+https => launch a SSL server
+fs =>
+path => 
+os => 
