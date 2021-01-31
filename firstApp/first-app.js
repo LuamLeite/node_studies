@@ -13,7 +13,20 @@ const server = http.createServer((req, res) => {
         return res.end(); //return res.end so we can not execute the code below after, after that it will change to localhost/message
     }
     if(url === '/message' && method === 'POST') {
-        console.log('hello');
+        const body = [];
+        req.on('data', (chunk) => {
+            console.log('chunk:', chunk);
+            body.push(chunk);
+        }); //listening to events, the data event will be fired whenever a new chunk of information is ready to be fired
+        //we need to define a function to execute
+
+        req.on('end', () => {//process all chunks
+            const parsedBody = Buffer.concat(body).toString();
+            //get all body chunks and concatenate then to a new buffer and converts to string
+            console.log('parsed Body:', parsedBody);
+            const message = parsedBody.split('=')[1]; //to get the message without =, and getting the position 1 resulting part of the array
+            fs.writeFileSync('message.txt', message); //writing the text to the file
+        }); 
         fs.writeFileSync('message.txt', 'DUMMY');
         res.statusCode = 302; //write some metadata, 302 for redirection
         res.setHeader('Location', '/');
